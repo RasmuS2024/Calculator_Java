@@ -20,13 +20,8 @@ public class Account {
     }
 
     public boolean withdraw(double amount) {
-        if (this.balance > 0 && amount <= this.balance) {
-            this.balance -= amount;
-            return true;
-        } else {
-            System.out.println("На счете не хватает средств!");
-            return false;
-        }
+        this.balance -= amount;
+        return true;
     }
 
     public boolean transfer(Account to, double amount) {

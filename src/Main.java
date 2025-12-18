@@ -8,6 +8,6 @@ public class Main {
         System.out.println("Баланс: " + account.getBalance());
         account.transfer(account2, 150000);
         System.out.println("Баланс счета: " + account.getAccountNumber() + " равен: " + account.getBalance());
-        System.out.println("Баланс счета: " + account2.getAccountNumber() + " равен: " + account.getBalance());
+        System.out.println("Баланс счета: " + account2.getAccountNumber() + " равен: " + account2.getBalance());
     }
 }
