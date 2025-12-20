@@ -5,9 +5,10 @@ public class DebitAccount extends Account {
 
     @Override
     public boolean withdraw(double amount) {
-        if (amount <= getBalance()) {
-            return super.withdraw(amount);
-        } 
+        if (amount > 0 && getBalance() >= amount) {
+            setBalance(getBalance() - amount);
+            return true;
+        }
         return false;
     }
 }

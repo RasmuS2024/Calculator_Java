@@ -13,7 +13,9 @@ public class Main {
         System.out.println("Баланс счета: " + Debit.getAccountNumber() + " равен: " + Debit.getBalance());
         System.out.println("Баланс кредитного счета: " + Credit.getAccountNumber() + " равен: " + Credit.getBalance());
 
-        Transaction Tr1 = new Transaction(TransactionType.DEPOSIT, 2500, null, "ACC-123", LocalDateTime.now(),  true, "Пополнение счета");
-        
+        Transaction Tr1 = new Transaction(TransactionType.DEPOSIT, 2500, null, "ACC-123", true, "Пополнение счета");
+                                         
+  
+
     }
 }

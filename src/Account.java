@@ -9,6 +9,10 @@ public abstract class Account {
         this.owner = owner;
     }
 
+    protected void setBalance(double balance) {
+        this.balance = balance;
+    }
+
     public boolean deposit(double amount) {
         if (amount > 0) {
             this.balance += amount;
@@ -17,13 +21,7 @@ public abstract class Account {
         return false;
     }
 
-    public boolean withdraw(double amount) {
-        if (amount > 0) {
-            this.balance -= amount;
-            return true;
-        }
-        return false;
-    }
+    public abstract boolean withdraw(double amount);
 
     public boolean transfer(Account to, double amount) {
         if (amount > 0) {

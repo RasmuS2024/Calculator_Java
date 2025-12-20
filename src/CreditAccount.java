@@ -11,11 +11,9 @@ public class CreditAccount extends Account{
 
     @Override
     public boolean withdraw(double amount) {
-        if (amount <= super.getBalance() + creditLimit) {
-            if (amount > super.getBalance()) {
-                this.creditLimit -= amount - super.getBalance();
-            }
-            return super.withdraw(amount);
+        if (amount > 0 && (getBalance() - amount) >= -creditLimit) {
+            setBalance(getBalance() - amount);
+            return true;
         }
         return false;
     }
