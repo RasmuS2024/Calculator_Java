@@ -7,9 +7,7 @@ public class DebitAccount extends Account {
     public boolean withdraw(double amount) {
         if (getBalance() >= amount) {
             return super.withdraw(amount);
-        } else {
-            System.out.println("Недостаточно средств! Доступно: " + getBalance());
-            return false;
-        }
+        } 
+        return false;
     }
 }
