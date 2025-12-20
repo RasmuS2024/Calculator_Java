@@ -14,7 +14,7 @@ public class Bank {
     }
 
     public Customer createCustomer(String fullName) {
-        return new Customer("Вася");
+        return new Customer(fullName);
     }
 
     public Account openDebitAccount(Customer owner) {
