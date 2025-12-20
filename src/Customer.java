@@ -7,7 +7,7 @@ public class Customer {
         this.fullName = fullName;
     }
 
-    public String getfullName() {
+    public String getFullName() {
         return fullName;
     }
 
