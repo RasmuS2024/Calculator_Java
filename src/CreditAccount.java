@@ -1,8 +1,12 @@
 public class CreditAccount extends Account{
-    private double creditLimit = 10000;
+    private double creditLimit;
 
-    public CreditAccount(String accountNumber, double balance, Customer owner) {
+    public CreditAccount(String accountNumber, double balance, double creditLimit, Customer owner) {
         super(accountNumber, balance, owner);
+        if (creditLimit < 0) {
+            throw new IllegalArgumentException("Кредитный лимит должен быть положительным или равным 0");
+        }
+        this.creditLimit = creditLimit;
     }
 
     @Override
@@ -16,9 +20,8 @@ public class CreditAccount extends Account{
         return false;
     }
 
-    @Override
-    public double getBalance() {
-        return this.creditLimit + super.getBalance();
+    public double getCreditLimit() {
+        return creditLimit;
     }
 
 }

@@ -1,9 +1,9 @@
 public class Customer {
-    private int id;
+    private int id = 1;
     private String fullName;
 
     Customer(int id, String fullName) {
-        this.id = id;
+        this.id = id++;
         this.fullName = fullName;
     }
 
