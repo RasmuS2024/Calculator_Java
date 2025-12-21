@@ -19,6 +19,34 @@ public class Transaction {
         this.message = message;
     }
 
+        public TransactionType getType() {
+        return type;
+    }
+    
+    public double getAmount() {
+        return amount;
+    }
+    
+    public String getFromAccountNumber() {
+        return fromAccount;
+    }
+    
+    public String getToAccountNumber() {
+        return toAccount;
+    }
+    
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+    
+    public boolean isSuccess() {
+        return success;
+    }
+    
+    public String getMessage() {
+        return message;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s: %.2f | From: %s | To: %s | Success: %b (%s)",
