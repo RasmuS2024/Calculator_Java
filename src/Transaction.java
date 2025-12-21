@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class Transaction {
     private final TransactionType type;
@@ -14,7 +15,7 @@ public class Transaction {
         this.amount = amount;
         this.fromAccount = from;
         this.toAccount = to;
-        this.timestamp = LocalDateTime.now();
+        this.timestamp = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
         this.success = success;
         this.message = message;
     }

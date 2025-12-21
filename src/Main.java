@@ -35,8 +35,12 @@ public class Main {
                         customerId = Integer.parseInt(scanner.nextLine());
                         
                         customer = bank.findCustomerById(customerId);
-                        debitAccount = bank.openDebitAccount(customer);
-                        System.out.println("Счет открыт. Номер счета: " + debitAccount.getAccountNumber());
+                        if (customer != null) {
+                            debitAccount = bank.openDebitAccount(customer);
+                            System.out.println("Счет открыт. Номер счета: " + debitAccount.getAccountNumber());
+                        } else {
+                            System.out.println("Клиент с ID " + customerId + " не найден");
+                        }
                         break;
                         
                     case 3:
@@ -47,8 +51,12 @@ public class Main {
                         creditLimit = Integer.parseInt(scanner.nextLine());
 
                         customer = bank.findCustomerById(customerId);
-                        creditAccount = bank.openCreditAccount(customer, creditLimit);
-                        System.out.println("Счет открыт. Номер счета: " + creditAccount.getAccountNumber());
+                        if (customer != null) {
+                            creditAccount = bank.openCreditAccount(customer, creditLimit);
+                            System.out.println("Счет открыт. Номер счета: " + creditAccount.getAccountNumber());
+                        } else  {
+                            System.out.println("Клиент с ID " + customerId + " не найден");
+                        }
                         break;
                         
                     case 4:
@@ -98,6 +106,7 @@ public class Main {
                         break;
                     
                     case 8:
+                        bank.printTransactions();
                         break;
                     
                     case 9:

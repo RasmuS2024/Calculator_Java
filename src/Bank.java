@@ -6,6 +6,7 @@ public class Bank {
     private final List<Account> accounts;
     private final List<Transaction> transactions;
     private int accountNumberCounter = 1;
+    private String accountNumberPrefix = "000";
 
     public Bank() {
         customers = new ArrayList<>();
@@ -20,14 +21,14 @@ public class Bank {
     }
 
     public DebitAccount openDebitAccount(Customer owner) {
-        String accountNumber = "D-" + accountNumberCounter++;
+        String accountNumber = accountNumberPrefix + accountNumberCounter++;
         DebitAccount account = new DebitAccount(accountNumber, 0, owner);
         accounts.add(account);
         return account;
     }
     
     public CreditAccount openCreditAccount(Customer owner, double creditLimit) {
-        String accountNumber = "C-" + accountNumberCounter++;
+        String accountNumber = accountNumberPrefix + accountNumberCounter++;
         CreditAccount account = new CreditAccount(accountNumber, 0, creditLimit, owner);
         accounts.add(account);
         return account;
