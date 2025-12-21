@@ -19,14 +19,14 @@ public class Bank {
         return customer;
     }
 
-    public Account openDebitAccount(Customer owner) {
+    public DebitAccount openDebitAccount(Customer owner) {
         String accountNumber = "D-ACC-" + accountNumberCounter++;
         DebitAccount account = new DebitAccount(accountNumber, 0, owner);
         accounts.add(account);
         return account;
     }
     
-    public Account openCreditAccount(Customer owner, double creditLimit) {
+    public CreditAccount openCreditAccount(Customer owner, double creditLimit) {
         String accountNumber = "C-ACC-" + accountNumberCounter++;
         CreditAccount account = new CreditAccount(accountNumber, 0, creditLimit, owner);
         accounts.add(account);
@@ -94,7 +94,7 @@ public class Bank {
         }
     }
 
-    private Customer findCustomerById(int id) {
+    public Customer findCustomerById(int id) {
         for (Customer customer : customers) {
             if (customer.getId() == id) {
                 return customer;

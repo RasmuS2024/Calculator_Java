@@ -22,7 +22,9 @@ public class Main {
                     case 2:
                         System.out.print("Введите ID клиента: ");
                         int customerId = Integer.parseInt(scanner.nextLine());
-                        // Открытие счета...
+                        customer = bank.findCustomerById(customerId);
+                        DebitAccount debitAccount = bank.openDebitAccount(customer);
+                        System.out.println("Счет открыт. Номер счета: " + debitAccount.getAccountNumber());
                         break;
                     
                     case 0:
@@ -45,7 +47,9 @@ public class Main {
     }
 
     public static void printMenu() {
-        System.out.println("Вы работаете с банком. Выберите задачу:\r\n" + 
+        System.out.println("\r\n" + 
+                        "---------------------------------------\r\n" +
+                        "Вы работаете с банком. Вам доступно:\r\n" + 
                         "1. Создать клиента\r\n" + 
                         "2. Открыть дебетовый счёт\r\n" + 
                         "3. Открыть кредитный счёт\r\n" + 
