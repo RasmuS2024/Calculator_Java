@@ -130,6 +130,28 @@ public class Bank {
         }
     }
 
+    public void printTransactions() {
+        System.out.println("\n=== История всех транзакций ===");
+        System.out.printf("%-25s %-12s %-10s %-15s %-15s %-8s %-30s%n",
+                         "Дата и время", "Тип", "Сумма", "От", "К", "Статус", "Сообщение");
+        System.out.println("-".repeat(120));
+        
+        for (Transaction transaction : transactions) {
+            System.out.printf("%-25s %-12s %-10.2f %-15s %-15s %-8s %-30s%n",
+                             transaction.getTimestamp(),
+                             transaction.getType(),
+                             transaction.getAmount(),
+                             transaction.getFromAccountNumber() != null ? 
+                                 transaction.getFromAccountNumber() : "—",
+                             transaction.getToAccountNumber() != null ? 
+                                 transaction.getToAccountNumber() : "—",
+                             transaction.isSuccess() ? "✓" : "✗",
+                             transaction.getMessage());
+        }
+        
+        System.out.println("Всего транзакций: " + transactions.size());
+    }
+
     public Customer findCustomerById(int id) {
         for (Customer customer : customers) {
             if (customer.getId() == id) {
