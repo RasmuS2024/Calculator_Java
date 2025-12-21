@@ -105,7 +105,7 @@ public class Bank {
         System.out.println("\n=== Счета клиента: " + customer.getFullName() + " ===");
         System.out.printf("%-15s %-20s %-12s %-10s%n", 
                          "Номер счета", "Тип счета", "Баланс", "Доп. информация");
-        System.out.println("-".repeat(60));
+        System.out.println("-".repeat(65));
         
         boolean hasAccounts = false;
         for (Account account : accounts) {
