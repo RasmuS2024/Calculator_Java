@@ -26,7 +26,18 @@ public class Main {
                         DebitAccount debitAccount = bank.openDebitAccount(customer);
                         System.out.println("Счет открыт. Номер счета: " + debitAccount.getAccountNumber());
                         break;
-                    
+                        
+                    case 3:
+                        System.out.print("Введите ID клиента: ");
+                        customerId = Integer.parseInt(scanner.nextLine());
+                        System.out.print("Введите кредитный лимит: ");
+                        int creditLimit = Integer.parseInt(scanner.nextLine());
+
+                        customer = bank.findCustomerById(customerId);
+                        CreditAccount creditAccount = bank.openCreditAccount(customer, creditLimit);
+                        System.out.println("Счет открыт. Номер счета: " + creditAccount.getAccountNumber());
+                        break;
+
                     case 0:
                         running = false;
                         System.out.println("Выход из программы...");
