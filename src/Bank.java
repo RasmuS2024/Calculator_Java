@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Bank {
     private final List<Customer> customers;
@@ -142,15 +144,67 @@ public class Bank {
                              transaction.getTimestamp(),
                              transaction.getType(),
                              transaction.getAmount(),
-                             transaction.getFromAccountNumber() != null ? 
-                                 transaction.getFromAccountNumber() : "—",
-                             transaction.getToAccountNumber() != null ? 
-                                 transaction.getToAccountNumber() : "—",
+                             transaction.getFromAccountNumber() != null ? transaction.getFromAccountNumber() : "—",
+                             transaction.getToAccountNumber() != null ? transaction.getToAccountNumber() : "—",
                              transaction.isSuccess() ? "✓" : "✗",
                              transaction.getMessage());
         }
         
         System.out.println("Всего транзакций: " + transactions.size());
+    }
+
+    public void printReport() {
+        System.out.println("\n=== ОБЩИЙ ОТЧЕТ БАНКА ===");
+        
+        System.out.println("\n1. Клиенты:");
+        System.out.println("   Всего клиентов: " + customers.size());
+        
+        System.out.println("\n2. Счета:");
+        int debitCount = 0;
+        int creditCount = 0;
+        double debitTotal = 0;
+        double creditTotal = 0;
+        
+        for (Account account : accounts) {
+            if (account instanceof DebitAccount) {
+                debitCount++;
+                debitTotal += account.getBalance();
+            } else if (account instanceof CreditAccount) {
+                creditCount++;
+                creditTotal += account.getBalance();
+            }
+        }
+        
+        System.out.printf("   Дебетовых счетов: %d, Общая сумма: %.2f%n", debitCount, debitTotal);
+        System.out.printf("   Кредитных счетов: %d, Общая сумма: %.2f%n", creditCount, creditTotal);
+        System.out.printf("   Всего счетов: %d, Общая сумма всех счетов: %.2f%n", 
+                         accounts.size(), debitTotal + creditTotal);
+        
+        System.out.println("\n3. Транзакции:");
+        int successfulCount = 0;
+        int failedCount = 0;
+        Map<TransactionType, Integer> transactionsByType = new HashMap<>();
+        
+        for (Transaction transaction : transactions) {
+            if (transaction.isSuccess()) {
+                successfulCount++;
+            } else {
+                failedCount++;
+            }
+            
+            TransactionType type = transaction.getType();
+            transactionsByType.put(type, transactionsByType.getOrDefault(type, 0) + 1);
+        }
+        
+        System.out.println("   Успешных операций: " + successfulCount);
+        System.out.println("   Неуспешных операций: " + failedCount);
+        System.out.println("   Всего операций: " + transactions.size());
+        
+        System.out.println("\n4. Операции по типам:");
+        for (TransactionType type : TransactionType.values()) {
+            int count = transactionsByType.getOrDefault(type, 0);
+            System.out.printf("   %s: %d операций%n", type, count);
+        }
     }
 
     public Customer findCustomerById(int id) {
