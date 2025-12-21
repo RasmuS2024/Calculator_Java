@@ -15,6 +15,7 @@ public class Main {
                     case 1:
                         System.out.print("Введите ФИО клиента: ");
                         String fullName = scanner.nextLine();
+                        
                         Customer customer = bank.createCustomer(fullName);
                         System.out.println("Клиент создан. ID: " + customer.getId());
                         break;
@@ -22,6 +23,7 @@ public class Main {
                     case 2:
                         System.out.print("Введите ID клиента: ");
                         int customerId = Integer.parseInt(scanner.nextLine());
+                        
                         customer = bank.findCustomerById(customerId);
                         DebitAccount debitAccount = bank.openDebitAccount(customer);
                         System.out.println("Счет открыт. Номер счета: " + debitAccount.getAccountNumber());
@@ -30,12 +32,53 @@ public class Main {
                     case 3:
                         System.out.print("Введите ID клиента: ");
                         customerId = Integer.parseInt(scanner.nextLine());
+                        
                         System.out.print("Введите кредитный лимит: ");
                         int creditLimit = Integer.parseInt(scanner.nextLine());
 
                         customer = bank.findCustomerById(customerId);
                         CreditAccount creditAccount = bank.openCreditAccount(customer, creditLimit);
                         System.out.println("Счет открыт. Номер счета: " + creditAccount.getAccountNumber());
+                        break;
+                        
+                    case 4:
+                        System.out.print("Введите номер счета: ");
+                        String accountNumber = scanner.nextLine();
+                        System.out.print("Введите сумму для пополнения: ");
+                        int amount = Integer.parseInt(scanner.nextLine());
+
+                        if (bank.deposit(accountNumber, amount)) {
+                            System.out.println("Счет " + accountNumber + " пополнен на сумму: " + amount);
+                        } else {
+                            System.out.println("Не удалось пополнить счет " + accountNumber + " на сумму: " + amount);
+                        }
+                        break;
+
+                    case 5:
+                        System.out.print("Введите номер счета: ");
+                        accountNumber = scanner.nextLine();
+                        System.out.print("Введите сумму для снятия: ");
+                        amount = Integer.parseInt(scanner.nextLine());
+                        if (bank.withdraw(accountNumber, amount)) {
+                            System.out.println("Со счета " + accountNumber + " снята сумма: " + amount);
+                        } else {
+                            System.out.println("Не удалось снять со счета " + accountNumber + " сумму: " + amount);
+                        }
+                        break;
+
+                    case 6:
+                        System.out.print("Введите номер счета с которого нужно перевести: ");
+                        String accountNumberFrom = scanner.nextLine();
+                        System.out.print("Введите номер счета на который нужно перевести: ");
+                        String accountNumberTo = scanner.nextLine();
+                        System.out.print("Введите сумму для перевода: ");
+                        amount = Integer.parseInt(scanner.nextLine());
+
+                        if (bank.transfer(accountNumberFrom, accountNumberTo, amount)) {
+                            System.out.println("Со счета " + accountNumberFrom + " переведена сумма: " + amount + " на счет: " + accountNumberTo);
+                        } else {
+                            System.out.println("Не удалось перевести со счета " + accountNumberFrom + " сумма: " + amount + " на счет: " + accountNumberTo);
+                        }
                         break;
 
                     case 0:

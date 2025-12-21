@@ -20,14 +20,14 @@ public class Bank {
     }
 
     public DebitAccount openDebitAccount(Customer owner) {
-        String accountNumber = "D-ACC-" + accountNumberCounter++;
+        String accountNumber = "D-" + accountNumberCounter++;
         DebitAccount account = new DebitAccount(accountNumber, 0, owner);
         accounts.add(account);
         return account;
     }
     
     public CreditAccount openCreditAccount(Customer owner, double creditLimit) {
-        String accountNumber = "C-ACC-" + accountNumberCounter++;
+        String accountNumber = "C-" + accountNumberCounter++;
         CreditAccount account = new CreditAccount(accountNumber, 0, creditLimit, owner);
         accounts.add(account);
         return account;
@@ -50,13 +50,49 @@ public class Bank {
             return false;
         }
         
-        if (account.deposit(amount)) {
-            logTransaction(TransactionType.DEPOSIT, amount, null, accountNumber, true, "ОК");
-            return true;
+        boolean result = account.deposit(amount);
+        String message = result ? "Пополнение успешно" : "Пополнение неуспешно";
+        logTransaction(TransactionType.WITHDRAW, amount, accountNumber, null,
+                      result, message);
+        return result;
+    }
+
+    public boolean withdraw(String accountNumber, double amount) {
+        Account account = findAccount(accountNumber);
+        if (account == null) {
+            logTransaction(TransactionType.WITHDRAW, amount, accountNumber, null,
+                          false, "Счет не найден");
+            return false;
         }
-        logTransaction(TransactionType.DEPOSIT, amount, null, accountNumber, false, "Пополнение счета не удалось!");
-        return false;
         
+        boolean result = account.withdraw(amount);
+        String message = result ? "Снятие успешно" : "Снятие неуспешно";
+        logTransaction(TransactionType.WITHDRAW, amount, accountNumber, null,
+                      result, message);
+        return result;
+    }
+
+    public boolean transfer(String fromAccountNumber, String toAccountNumber, double amount) {
+        Account fromAccount = findAccount(fromAccountNumber);
+        Account toAccount = findAccount(toAccountNumber);
+        
+        if (fromAccount == null || toAccount == null) {
+            String errorMsg = fromAccount == null ? "Счет отправителя не найден" : "Счет получателя не найден";
+            logTransaction(TransactionType.TRANSFER, amount, fromAccountNumber, toAccountNumber,
+                          false, errorMsg);
+            return false;
+        }
+        
+        if (fromAccountNumber.equals(toAccountNumber)) {
+            logTransaction(TransactionType.TRANSFER, amount, fromAccountNumber, toAccountNumber,
+                          false, "Нельзя переводить на тот же счет");
+            return false;
+        }
+        
+        boolean success = fromAccount.transfer(toAccount, amount);
+        String message = success ? "Перевод выполнен" : "Перевод не выполнен";
+        logTransaction(TransactionType.TRANSFER, amount, fromAccountNumber, toAccountNumber, success, message);
+        return success;
     }
 
     public void printCustomerAccounts(int customerId) {
