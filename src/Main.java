@@ -110,6 +110,7 @@ public class Main {
                         break;
                     
                     case 9:
+                        bank.printReport();
                         break;
 
                     case 0:

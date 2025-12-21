@@ -156,10 +156,7 @@ public class Bank {
     public void printReport() {
         System.out.println("\n=== ОБЩИЙ ОТЧЕТ БАНКА ===");
         
-        System.out.println("\n1. Клиенты:");
-        System.out.println("   Всего клиентов: " + customers.size());
-        
-        System.out.println("\n2. Счета:");
+        System.out.println("\nСчета:");
         int debitCount = 0;
         int creditCount = 0;
         double debitTotal = 0;
@@ -180,7 +177,7 @@ public class Bank {
         System.out.printf("   Всего счетов: %d, Общая сумма всех счетов: %.2f%n", 
                          accounts.size(), debitTotal + creditTotal);
         
-        System.out.println("\n3. Транзакции:");
+        System.out.println("\nТранзакции:");
         int successfulCount = 0;
         int failedCount = 0;
         Map<TransactionType, Integer> transactionsByType = new HashMap<>();
@@ -199,12 +196,6 @@ public class Bank {
         System.out.println("   Успешных операций: " + successfulCount);
         System.out.println("   Неуспешных операций: " + failedCount);
         System.out.println("   Всего операций: " + transactions.size());
-        
-        System.out.println("\n4. Операции по типам:");
-        for (TransactionType type : TransactionType.values()) {
-            int count = transactionsByType.getOrDefault(type, 0);
-            System.out.printf("   %s: %d операций%n", type, count);
-        }
     }
 
     public Customer findCustomerById(int id) {
