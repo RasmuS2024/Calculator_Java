@@ -88,7 +88,7 @@ public class Bank {
         
         if (fromAccountNumber.equals(toAccountNumber)) {
             logTransaction(TransactionType.TRANSFER, amount, fromAccountNumber, toAccountNumber,
-                          false, "Нельзя переводить на тот же счет");
+                          false, "Нельзя перевести на тот же счет");
             return false;
         }
         
@@ -105,7 +105,7 @@ public class Bank {
             return;
         }
         
-        System.out.println("\n=== Счета клиента: " + customer.getFullName() + " ===");
+        System.out.println("\n--- Счета клиента: " + customer.getFullName() + " ---");
         System.out.printf("%-15s %-20s %-12s %-10s%n", 
                          "Номер счета", "Тип счета", "Баланс", "Доп. информация");
         System.out.println("-".repeat(65));
@@ -134,7 +134,7 @@ public class Bank {
     }
 
     public void printTransactions() {
-        System.out.println("\n=== История всех транзакций ===");
+        System.out.println("\n--- История всех транзакций ---");
         System.out.printf("%-25s %-12s %-10s %-15s %-15s %-8s %-30s%n",
                          "Дата и время", "Тип", "Сумма", "От", "К", "Статус", "Сообщение");
         System.out.println("-".repeat(120));
@@ -154,7 +154,7 @@ public class Bank {
     }
 
     public void printReport() {
-        System.out.println("\n=== ОБЩИЙ ОТЧЕТ БАНКА ===");
+        System.out.println("\n--- ОБЩИЙ ОТЧЕТ БАНКА ---");
         
         System.out.println("\nСчета:");
         int debitCount = 0;
@@ -207,8 +207,7 @@ public class Bank {
         return null;
     }
 
-    private void logTransaction(TransactionType type, double amount, String fromAccount, String toAccount,
-                               boolean success, String message) {
+    private void logTransaction(TransactionType type, double amount, String fromAccount, String toAccount, boolean success, String message) {
         Transaction transaction = new Transaction(type, amount, fromAccount, toAccount, success, message);
         transactions.add(transaction);
     }
