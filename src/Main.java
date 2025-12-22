@@ -2,8 +2,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Bank bank = new Bank();
         Customer customer;
         DebitAccount debitAccount;
         CreditAccount creditAccount;
@@ -11,11 +9,14 @@ public class Main {
         String accountNumber;
         String accountNumberFrom;
         String accountNumberTo;
-        boolean running = true;
         int choice;
         int customerId;
         int amount;
         int creditLimit;
+        boolean running = true;
+
+        Scanner scanner = new Scanner(System.in);
+        Bank bank = new Bank();
 
         while (running) {
             printMenu();
@@ -26,6 +27,7 @@ public class Main {
                     case 1:
                         System.out.print("Введите ФИО клиента: ");
                         fullName = scanner.nextLine();
+
                         customer = bank.createCustomer(fullName);
                         System.out.println("Клиент создан. ID: " + customer.getId());
                         break;
@@ -33,8 +35,9 @@ public class Main {
                     case 2:
                         System.out.print("Введите ID клиента: ");
                         customerId = Integer.parseInt(scanner.nextLine());
-                        
+
                         customer = bank.findCustomerById(customerId);
+
                         if (customer != null) {
                             debitAccount = bank.openDebitAccount(customer);
                             System.out.println("Счет открыт. Номер счета: " + debitAccount.getAccountNumber());
@@ -51,6 +54,7 @@ public class Main {
                         creditLimit = Integer.parseInt(scanner.nextLine());
 
                         customer = bank.findCustomerById(customerId);
+
                         if (customer != null) {
                             creditAccount = bank.openCreditAccount(customer, creditLimit);
                             System.out.println("Счет открыт. Номер счета: " + creditAccount.getAccountNumber());
@@ -62,6 +66,7 @@ public class Main {
                     case 4:
                         System.out.print("Введите номер счета: ");
                         accountNumber = scanner.nextLine();
+
                         System.out.print("Введите сумму для пополнения: ");
                         amount = Integer.parseInt(scanner.nextLine());
 
@@ -75,8 +80,10 @@ public class Main {
                     case 5:
                         System.out.print("Введите номер счета: ");
                         accountNumber = scanner.nextLine();
+
                         System.out.print("Введите сумму для снятия: ");
                         amount = Integer.parseInt(scanner.nextLine());
+
                         if (bank.withdraw(accountNumber, amount)) {
                             System.out.println("Со счета " + accountNumber + " снята сумма: " + amount);
                         } else {
@@ -87,8 +94,10 @@ public class Main {
                     case 6:
                         System.out.print("Введите номер счета с которого нужно перевести: ");
                         accountNumberFrom = scanner.nextLine();
+
                         System.out.print("Введите номер счета на который нужно перевести: ");
                         accountNumberTo = scanner.nextLine();
+
                         System.out.print("Введите сумму для перевода: ");
                         amount = Integer.parseInt(scanner.nextLine());
 
@@ -102,6 +111,7 @@ public class Main {
                     case 7:
                         System.out.print("Введите ID клиента: ");
                         customerId = Integer.parseInt(scanner.nextLine());
+
                         bank.printCustomerAccounts(customerId);
                         break;
                     
@@ -129,23 +139,23 @@ public class Main {
 
         }
         scanner.close();
-
     }
 
     public static void printMenu() {
-        System.out.println("\r\n" + 
-                        "---------------------------------------\r\n" +
-                        "Вы работаете с банком. Вам доступно:\r\n" + 
-                        "1. Создать клиента\r\n" + 
-                        "2. Открыть дебетовый счёт\r\n" + 
-                        "3. Открыть кредитный счёт\r\n" + 
-                        "4. Пополнить\r\n" + 
-                        "5. Снять\r\n" + 
-                        "6. Перевести\r\n" + 
-                        "7. Показать счета клиента\r\n" + 
-                        "8. Показать транзакции\r\n" + 
-                        "9. Отчёт банка\r\n" + 
-                        "0. Выход\r\n" + 
-                        "Введите номер задачи и нажмите Enter:");
+        System.out.println(
+            "\r\n" + 
+            "---------------------------------------\r\n" +
+            "Вы работаете с банком. Вам доступно:\r\n" + 
+            "1. Создать клиента\r\n" + 
+            "2. Открыть дебетовый счёт\r\n" + 
+            "3. Открыть кредитный счёт\r\n" + 
+            "4. Пополнить\r\n" + 
+            "5. Снять\r\n" + 
+            "6. Перевести\r\n" + 
+            "7. Показать счета клиента\r\n" + 
+            "8. Показать транзакции\r\n" + 
+            "9. Отчёт банка\r\n" + 
+            "0. Выход\r\n" + 
+            "Введите номер задачи и нажмите Enter:");
     }
 }
