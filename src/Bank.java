@@ -8,7 +8,7 @@ public class Bank {
     private final List<Account> accounts;
     private final List<Transaction> transactions;
     private int accountNumberCounter = 1;
-    private String accountNumberPrefix = "000";
+    private String accountNumberPrefix = "00";
 
     public Bank() {
         customers = new ArrayList<>();
